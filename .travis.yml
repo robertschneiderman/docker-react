@@ -7,3 +7,16 @@ before_install:
 
 scripts:
   - docker run -e CI=true docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "schneiderman.io"
+  env: "Docker"
+  bucket_name: "elasticbeanstalk-us-west-2-242689856576"
+  bucket_path: "schneiderman.io"
+  on:
+    branch: "master"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: 
+    secure: "$AWS_SECRET_KEY"
